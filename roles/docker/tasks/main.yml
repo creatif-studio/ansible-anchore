@@ -4,12 +4,12 @@
     update_cache: yes
     autoremove: yes
   tags:
-    - docker
+    - install-docker
 
 - name: "install system dependencies"
   apt:
     name:
-      - software-properties-docker
+      - software-properties-common
       - ca-certificates
       - lsb-release
       - curl
@@ -22,14 +22,14 @@
       - net-tools
     state: present
   tags:
-    - docker
+    - install-docker
 
 - name: "add gpg docker"
   apt_key:
     url: "{{ docker_apt_gpg_key }}"
     state: present
   tags:
-    - docker
+    - install-docker
 
 - name: "add docker repository"
   apt_repository:
@@ -37,7 +37,7 @@
     state: present
     update_cache: true
   tags:
-    - docker
+    - install-docker
 
 - name: "install docker"
   apt: name={{ item }} update_cache=false
@@ -46,13 +46,13 @@
     - docker-ce-cli
     - containerd.io
   tags:
-    - docker
+    - install-docker
 
 - name: "install python package manager"
   apt:
     name: python3-pip
   tags:
-    - docker
+    - install-docker
 
 - name: "install python sdk"
   become_user: "{{ ansible_user }}"
@@ -62,19 +62,19 @@
       - docker-compose
       - jsondiff
   tags:
-    - docker
+    - install-docker
 
 - name: "add user permissions"
   shell: "usermod -aG docker {{ ansible_user }}"
   tags:
-    - docker
+    - install-docker
 
 - name: "install docker limit logs"
   template:
     src: daemon.j2
     dest: /etc/docker/daemon.json
   tags: 
-    - docker
+    - install-docker
 
 - name: "restart docker service"
   systemd:
@@ -83,7 +83,7 @@
     state: restarted
     name: docker
   tags:
-    - docker
+    - install-docker
 
 - name: "creates a cron file under /etc/cron.d"
   ansible.builtin.cron:
@@ -94,19 +94,4 @@
     job: "/bin/bash -c 'docker system prune -fa'"
     cron_file: prune
   tags: 
-    - docker
-
-- name: "create a network"
-  become_user: "{{ ansible_user }}"
-  community.docker.docker_network:
-    name: ansible
-    # driver: overlay
-  tags: 
-    - docker
-
-- name: "create a volume"
-  become_user: "{{ ansible_user }}"
-  community.docker.docker_volume:
-    name: anchore-volume
-  tags: 
-    - docker
+    - install-docker

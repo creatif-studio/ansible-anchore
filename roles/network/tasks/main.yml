@@ -1,0 +1,14 @@
+- name: "create a network"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_network:
+    name: ansible
+    # driver: overlay
+  tags: 
+    - install-network
+
+- name: "create a volume"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_volume:
+    name: anchore-volume
+  tags: 
+    - install-network

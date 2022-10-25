@@ -4,7 +4,7 @@
   community.docker.docker_container:
     name: "{{ anchore_database_docker_name }}"
     image: "{{ anchore_database_docker_image }}:{{ anchore_database_docker_tag }}"
-    volume:
+    volumes:
       - anchore-volume:/var/lib/postgresql/data
     env:
       POSTGRES_PASSWORD: mysecretpassword
@@ -13,9 +13,5 @@
     restart_policy: always
     expose:
       - "{{ anchore_database_docker_port }}"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 100m
   tags:
     - install-anchore

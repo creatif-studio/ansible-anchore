@@ -9,10 +9,6 @@
     restart_policy: always
     ports:
       - "{{ anchore_api_docker_port }}:8228"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 100m
     env:
       ANCHORE_ENDPOINT_HOSTNAME: api
       ANCHORE_ADMIN_PASSWORD: foobar

@@ -9,10 +9,6 @@
     restart_policy: always
     expose:
       - "{{ anchore_queue_docker_port }}"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 100m
     env:
       ANCHORE_ENDPOINT_HOSTNAME: queue
       ANCHORE_ADMIN_PASSWORD: foobar
@@ -20,4 +16,4 @@
       ANCHORE_DB_PASSWORD: mysecretpassword
     command: ["anchore-manager", "service", "start", "simplequeue"]
   tags:
-    - install-anchore-policy
+    - install-anchore

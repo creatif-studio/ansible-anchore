@@ -9,15 +9,11 @@
     restart_policy: always
     expose:
       - "{{ anchore_catalog_docker_port }}"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 100m
     env:
-    - ANCHORE_ENDPOINT_HOSTNAME: catalog
-    - ANCHORE_ADMIN_PASSWORD: foobar
-    - ANCHORE_DB_HOST: db
-    - ANCHORE_DB_PASSWORD: mysecretpassword
+      ANCHORE_ENDPOINT_HOSTNAME: catalog
+      ANCHORE_ADMIN_PASSWORD: foobar
+      ANCHORE_DB_HOST: db
+      ANCHORE_DB_PASSWORD: mysecretpassword
     command: ["anchore-manager", "service", "start", "catalog"]
   tags:
-    - install-anchore-catalog
+    - install-anchore
