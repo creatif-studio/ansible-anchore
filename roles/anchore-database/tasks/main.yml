@@ -1,0 +1,27 @@
+---
+- name: "Install Anchore DB"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_container:
+    name: "{{ anchore_database_docker_name }}"
+    image: "{{ anchore_database_docker_image }}:{{ anchore_database_docker_tag }}"
+    volume:
+      - anchore-volume:/var/lib/postgresql/data
+    networks:
+      - name: ansible
+    restart_policy: always
+    expose:
+      - "{{ anchore_database_docker_port }}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+    env:
+    - POSTGRES_PASSWORD: mysecretpassword
+    command: ["anchore-manager", "service", "start", "catalog"]
+  tags:
+    - install-anchore-catalog
+db:
+  image: "postgres:9"
+  volumes:
+  - anchore-db-volume:/var/lib/postgresql/data
+  

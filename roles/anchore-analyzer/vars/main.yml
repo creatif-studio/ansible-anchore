@@ -1,0 +1,4 @@
+anchore_analyzer_docker_name: analyzer
+anchore_analyzer_docker_image: anchore/anchore-engine-dev
+anchore_analyzer_docker_tag: latest
+anchore_analyzer_docker_port: 8228

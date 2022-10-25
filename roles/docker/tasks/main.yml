@@ -103,3 +103,10 @@
     # driver: overlay
   tags: 
     - docker
+
+- name: "create a volume"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_volume:
+    name: anchore-volume
+  tags: 
+    - docker

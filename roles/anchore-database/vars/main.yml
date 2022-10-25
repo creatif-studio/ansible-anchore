@@ -1,0 +1,4 @@
+anchore_catalog_docker_name: db
+anchore_catalog_docker_image: postgres
+anchore_catalog_docker_tag: 9
+anchore_catalog_docker_port: 5432

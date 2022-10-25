@@ -1,0 +1,4 @@
+anchore_docker_name: api
+anchore_docker_image: anchore/anchore-engine-dev
+anchore_docker_tag: latest
+anchore_docker_port: 8228

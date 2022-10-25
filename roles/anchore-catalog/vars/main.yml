@@ -1,0 +1,4 @@
+anchore_catalog_docker_name: catalog
+anchore_catalog_docker_image: anchore/anchore-engine-dev
+anchore_catalog_docker_tag: latest
+anchore_catalog_docker_port: 8228

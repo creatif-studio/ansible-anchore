@@ -4,4 +4,9 @@
     - group_vars/global.yml
   roles:
     - docker
-    - anchore
+    - anchore-database
+    - anchore-catalog
+    - anchore-analyzer
+    - anchore-policy
+    - anchore-queue
+    - anchore-api

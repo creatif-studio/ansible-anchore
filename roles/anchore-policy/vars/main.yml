@@ -1,0 +1,4 @@
+anchore_queue_docker_name: api
+anchore_queue_docker_image: anchore/anchore_queue-engine-dev
+anchore_queue_docker_tag: latest
+anchore_queue_docker_port: 8228

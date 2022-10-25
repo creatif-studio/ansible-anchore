@@ -1,0 +1,23 @@
+---
+- name: "Install Anchore Api"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_container:
+    name: "{{ anchore_docker_name }}"
+    image: "{{ anchore_docker_image }}:{{ anchore_docker_tag }}"
+    networks:
+      - name: ansible
+    restart_policy: always
+    ports:
+      - "{{ anchore_docker_port }}:8228"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+    env:
+      ANCHORE_ENDPOINT_HOSTNAME: api
+      ANCHORE_ADMIN_PASSWORD: foobar
+      ANCHORE_DB_HOST: db
+      ANCHORE_DB_PASSWORD: mysecretpassword
+    command: ["anchore-manager", "service", "start", "apiext"]
+  tags:
+    - install-anchore
