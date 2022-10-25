@@ -1,4 +1,4 @@
-anchore_policy_docker_name: api
-anchore_policy_docker_image: anchore/anchore-engine-dev
-anchore_policy_docker_tag: latest
-anchore_policy_docker_port: 8228
+anchore_queue_docker_name: queue
+anchore_queue_docker_image: anchore/anchore-engine-dev
+anchore_queue_docker_tag: latest
+anchore_queue_docker_port: 8228

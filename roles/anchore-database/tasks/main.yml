@@ -6,6 +6,8 @@
     image: "{{ anchore_database_docker_image }}:{{ anchore_database_docker_tag }}"
     volume:
       - anchore-volume:/var/lib/postgresql/data
+    env:
+      POSTGRES_PASSWORD: mysecretpassword
     networks:
       - name: ansible
     restart_policy: always
@@ -15,13 +17,5 @@
       driver: "json-file"
       options:
         max-size: 100m
-    env:
-    - POSTGRES_PASSWORD: mysecretpassword
-    command: ["anchore-manager", "service", "start", "catalog"]
   tags:
-    - install-anchore-catalog
-db:
-  image: "postgres:9"
-  volumes:
-  - anchore-db-volume:/var/lib/postgresql/data
-  
+    - install-anchore

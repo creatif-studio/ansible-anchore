@@ -2,13 +2,13 @@
 - name: "Install Anchore Api"
   become_user: "{{ ansible_user }}"
   community.docker.docker_container:
-    name: "{{ anchore_docker_name }}"
-    image: "{{ anchore_docker_image }}:{{ anchore_docker_tag }}"
+    name: "{{ anchore_api_docker_name }}"
+    image: "{{ anchore_api_docker_image }}:{{ anchore_api_docker_tag }}"
     networks:
       - name: ansible
     restart_policy: always
     ports:
-      - "{{ anchore_docker_port }}:8228"
+      - "{{ anchore_api_docker_port }}:8228"
     logging:
       driver: "json-file"
       options:

@@ -14,10 +14,10 @@
       options:
         max-size: 100m
     env:
-    - ANCHORE_ENDPOINT_HOSTNAME: policy
-    - ANCHORE_ADMIN_PASSWORD: foobar
-    - ANCHORE_DB_HOST: db
-    - ANCHORE_DB_PASSWORD: mysecretpassword
+      ANCHORE_ENDPOINT_HOSTNAME: policy-engine
+      ANCHORE_ADMIN_PASSWORD: foobar
+      ANCHORE_DB_HOST: db
+      ANCHORE_DB_PASSWORD: mysecretpassword
     command: ["anchore-manager", "service", "start", "policy_engine"]
   tags:
     - install-anchore-policy
