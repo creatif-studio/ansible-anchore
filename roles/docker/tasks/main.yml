@@ -1,0 +1,105 @@
+---
+- name: "update operating systems"
+  apt:
+    update_cache: yes
+    autoremove: yes
+  tags:
+    - docker
+
+- name: "install system dependencies"
+  apt:
+    name:
+      - software-properties-docker
+      - ca-certificates
+      - lsb-release
+      - curl
+      - gnupg
+      - zip
+      - unzip
+      - git
+      - ncdu
+      - htop
+      - net-tools
+    state: present
+  tags:
+    - docker
+
+- name: "add gpg docker"
+  apt_key:
+    url: "{{ docker_apt_gpg_key }}"
+    state: present
+  tags:
+    - docker
+
+- name: "add docker repository"
+  apt_repository:
+    repo: "{{ docker_apt_repository }}"
+    state: present
+    update_cache: true
+  tags:
+    - docker
+
+- name: "install docker"
+  apt: name={{ item }} update_cache=false
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+  tags:
+    - docker
+
+- name: "install python package manager"
+  apt:
+    name: python3-pip
+  tags:
+    - docker
+
+- name: "install python sdk"
+  become_user: "{{ ansible_user }}"
+  pip:
+    name:
+      - docker
+      - docker-compose
+      - jsondiff
+  tags:
+    - docker
+
+- name: "add user permissions"
+  shell: "usermod -aG docker {{ ansible_user }}"
+  tags:
+    - docker
+
+- name: "install docker limit logs"
+  template:
+    src: daemon.j2
+    dest: /etc/docker/daemon.json
+  tags: 
+    - docker
+
+- name: "restart docker service"
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: docker
+  tags:
+    - docker
+
+- name: "creates a cron file under /etc/cron.d"
+  ansible.builtin.cron:
+    name: docker system prune
+    minute: "0"
+    hour: "12"
+    user: root
+    job: "/bin/bash -c 'docker system prune -fa'"
+    cron_file: prune
+  tags: 
+    - docker
+
+- name: "create a network"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_network:
+    name: ansible
+    # driver: overlay
+  tags: 
+    - docker

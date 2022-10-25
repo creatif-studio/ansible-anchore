@@ -20,7 +20,7 @@ Convert docker compose to ansible roles
 # How to run in server?
 
 - replace ip in ansible.host with `192.168.56.2`
-- change `ansible_user` in `group_vars/all.yml` with real user
+- change `ansible_user` in `group_vars/global.yml` with real user
 - replace ssh-key in `files/ssh.key` with real ssh key
 - optional: uncomment ansible_ssh_pass, ansible_sudo_pass and replace `password` with your password server
 - run `ansible-playbook ansible.yml`
