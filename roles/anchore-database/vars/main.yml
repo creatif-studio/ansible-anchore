@@ -1,4 +1,4 @@
 anchore_database_docker_name: db
 anchore_database_docker_image: postgres
-anchore_database_docker_tag: 9
+anchore_database_docker_tag: 9.6
 anchore_database_docker_port: 5432

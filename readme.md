@@ -12,10 +12,12 @@ Convert docker compose to ansible roles
 
 - go to vagrant directory `cd vagrant` and `vagrant up`
 - run this command `vagrant ssh-config > vagrant-ssh`
-- cat the private key in this path `IdentityFile`
+- `cat` the private key in this path `IdentityFile`
 - replace `files/ssh.key` with the value above
 - replace ip in `ansible.host` with `192.168.56.2`
-- run `ansible-playbook ansible.yml`
+- run `ansible-playbook ansible.yml --tags "install-docker"`
+- run `ansible-playbook ansible.yml --tags "install-network"`
+- run `ansible-playbook ansible.yml --tags "install-anchore"`
 
 # How to run in server?
 
@@ -24,4 +26,5 @@ Convert docker compose to ansible roles
 - replace ssh-key in `files/ssh.key` with real ssh key
 - optional: uncomment ansible_ssh_pass, ansible_sudo_pass and replace `password` with your password server
 - run `ansible-playbook ansible.yml --tags "install-docker"`
+- run `ansible-playbook ansible.yml --tags "install-network"`
 - run `ansible-playbook ansible.yml --tags "install-anchore"`
