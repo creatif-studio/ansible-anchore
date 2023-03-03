@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/creatif-studio/ansible-anchore">
-    <img alt="ansible-anchore" width="100px" height="100px" src="./assets/logo.png">
+    <img alt="ansible-anchore" width="80px" height="80px" src="./assets/logo.png">
   </a>
 </p>
 
