@@ -1,6 +1,12 @@
-# Anchore Ansible Role
+<p align="center">
+  <a href="https://github.com/creatif-studio/ansible-anchore">
+    <img alt="ansible-anchore" width="75px" height="75px" src="./assets/logo.png">
+  </a>
+</p>
 
-Convert docker compose to ansible roles
+<p align="center">
+  Deploy and manage Anchore with ease using our Ansible playbook
+</p>
 
 # Requirements
 
